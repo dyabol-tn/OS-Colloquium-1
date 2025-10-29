@@ -1,6 +1,6 @@
-/*#include "delete_duplicates.h"
+#include "delete_duplicates.h"
 
-vector<int> deleteDuplicates(vector<int> arr) {
+vector<int> deleteDuplicates(const vector<int>& arr) {
 	vector<int> result;
 
 	for (int i = 0; i < arr.size(); i++) {
@@ -17,4 +17,4 @@ vector<int> deleteDuplicates(vector<int> arr) {
 		}
 	}
 	return result;
-}*/
+}

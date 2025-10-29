@@ -1,4 +1,4 @@
-/*#include "fact.h"
+#include "fact.h"
 
 vector<int> fact(int n) {
     int temp = 1;
@@ -8,4 +8,4 @@ vector<int> fact(int n) {
         factorials.push_back(temp);
     }
     return factorials;
-}*/
+}

@@ -1,8 +1,26 @@
-﻿// Colloquium OS 1.h : включаемый файл для стандартных системных включаемых файлов
-// или включаемые файлы для конкретного проекта.
-
-#pragma once
-
+﻿#pragma once
 #include <iostream>
+#include <vector>
+#include <windows.h>
+#include "my_list.h"
 
-// TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
+using namespace std;
+
+struct FactorialData {
+    int n;
+    vector<int> result;
+};
+
+struct DuplicatesData {
+    vector<int> input;
+    vector<int> output;
+};
+
+struct ListData {
+    vector<int> input;
+    MyList* reversedList;
+};
+
+DWORD WINAPI FactorialThread(LPVOID lpParam);
+DWORD WINAPI DuplicatesThread(LPVOID lpParam);
+DWORD WINAPI ReverseListThread(LPVOID lpParam);

@@ -1,12 +1,45 @@
-﻿# CMakeList.txt: проект CMake для Colloquium OS 1; включите исходный код и определения,
-# укажите здесь логику для конкретного проекта.
-#
+﻿cmake_minimum_required(VERSION 3.14)
+project(Colloquium_OS_1)
 
-# Добавьте источник в исполняемый файл этого проекта.
-add_executable (CMakeTarget "Colloquium OS 1.cpp" "Colloquium OS 1.h" "fact.cpp" "fact.h" "delete_duplicates.cpp" "delete_duplicates.h")
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET CMakeTarget PROPERTY CXX_STANDARD 20)
-endif()
+include(FetchContent)
 
-# TODO: Добавьте тесты и целевые объекты, если это необходимо.
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG release-1.12.1
+)
+
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+# Общие исходные файлы
+set(COMMON_SOURCES
+    fact.cpp
+    delete_duplicates.cpp
+    reverse_list.cpp
+)
+
+# Основной исполняемый файл
+add_executable(Colloquium_OS_1 
+    "Colloquium OS 1.cpp"
+    ${COMMON_SOURCES}
+)
+
+target_include_directories(Colloquium_OS_1 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+# Исполняемый файл для тестов
+add_executable(Colloquium_OS_1_Tests
+    "test_fact.cpp"
+    "test_delete_duplicates.cpp"
+    "test_reverse_list.cpp"
+    ${COMMON_SOURCES}
+)
+
+target_include_directories(Colloquium_OS_1_Tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(Colloquium_OS_1_Tests gtest gtest_main)
+
+enable_testing()
+add_test(NAME Colloquium_OS_1_Tests COMMAND Colloquium_OS_1_Tests)
